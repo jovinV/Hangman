@@ -3,6 +3,7 @@ import { HangmanDrawing } from "./HangmanDrawing";
 import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 import words from "./wordList.json";
+// import words from "./testWordList.json";
 import './App.css';
 
 
@@ -72,7 +73,12 @@ function App() {
         </div>
         <div className="right-container">
           <div className="word-container">
-            <HangmanWord reveal={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
+            <HangmanWord 
+              reveal={isWinner || isLoser} 
+              guessedLetters={guessedLetters} 
+              wordToGuess={wordToGuess}
+              isWinner={isWinner}
+            />
           </div>
             <Keyboard 
               disabled={isWinner || isLoser}
