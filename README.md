@@ -1,6 +1,6 @@
 # Hangman.
 
-<strong>Hangman.</strong> is a web-based hangman game based on tutorial from Web Dev Simplified https://www.youtube.com/watch?v=-ONUyenGnWwWeb-based hangman game based on tutorial from Web Dev Simplified https://www.youtube.com/watch?v=-ONUyenGnWw
+<strong>Hangman.</strong> is a web-based hangman game based on tutorial from Web Dev Simplified https://www.youtube.com/watch?v=-ONUyenGnWw
 
 ## Making it work 🛠️
 Made with Typescript, HTML and CSS in React + Vite. This project's purpose was mostly to practice using Typescript and React, learn how to deploy a site along with Vite, and understand how to implement responsive design, but I ended up really getting into the visuals and animations of the game. 
