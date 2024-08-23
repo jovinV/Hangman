@@ -2,11 +2,12 @@ import { useCallback, useEffect, useState } from "react";
 import { HangmanDrawing } from "./HangmanDrawing";
 import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
-import words from "./wordList.json"
-import './App.css'
+import words from "./wordList.json";
+import './App.css';
+
 
 function getWord() {
-  return words[Math.floor(Math.random() * words.length)]
+  return words[Math.floor(Math.random() * words.length)];
 }
 
 function App() {
@@ -15,13 +16,19 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
   const isLoser = incorrectLetters.length >= 6;
-  const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter))
+  const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter));
 
   const addGuessedLetter = useCallback((letter: string) => {
     if (guessedLetters.includes(letter) || isLoser || isWinner) return
 
     setGuessedLetters(currentLetters => [...currentLetters, letter])
   }, [guessedLetters, isWinner, isLoser])
+
+  function resetGame() {
+    setGuessedLetters([]);
+    setWordToGuess(getWord());
+  }
+
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -44,8 +51,7 @@ function App() {
       if (key !== "Enter") return
 
       e.preventDefault();
-      setGuessedLetters([]);
-      setWordToGuess(getWord());
+      resetGame();
     }
     document.addEventListener("keydown", handler);
 
@@ -77,8 +83,16 @@ function App() {
               addGuessedLetter={addGuessedLetter}
             />
           <div className="status-message">
-            {isWinner && "Nice! Refresh or press enter to try again"}
-            {isLoser && "Refresh or press enter to try again"}
+            {isWinner && 
+              <>
+                Nice. Press <div onClick={resetGame} className={`enter-btn`}>Enter</div> to play again
+              </>
+            }
+            {isLoser && 
+              <>
+                Press <div onClick={resetGame} className={`enter-btn`}>Enter</div> to play again
+              </>
+            }
           </div>
         </div>
       </div>
